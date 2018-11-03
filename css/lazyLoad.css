@@ -1,0 +1,40 @@
+
+.placeholder{
+  margin:10px;
+  padding:10px;
+  
+  
+}
+
+.placeholder .line{height:12px;margin:0 0 10px 10px;}
+.placeholder .line:nth-child(1){width: 60%;}
+.placeholder .line:nth-child(2){width: 30%;}
+
+
+
+
+.placeholder.wave div{
+    animation: wave 1s infinite linear forwards;
+    -webkit-animation:wave 1s infinite linear forwards;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+}
+
+@keyframes wave{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+@-webkit-keyframes wave{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
