@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	    <link rel="stylesheet" href="../css/materialize.min.css">
-	     <link rel="stylesheet" href="../css/lazyLoad.css">
+	    <link rel="stylesheet" href="css/materialize.min.css">
+	     <link rel="stylesheet" href="css/lazyLoad.css">
     <script
-        src="../js/Jquery.js"></script>
+        src="js/Jquery.js"></script>
 
     <!-- Compiled and minified JavaScript -->
-    <script src="../js/materialize.min.js"></script>
+    <script src="js/materialize.min.js"></script>
 
 
 	<title>test</title>
@@ -62,7 +62,7 @@
         <div class="row">
           <div class=" input-field col s12 ">
             <i class="material-icons prefix">bookmark</i>
-            <input type="text" name="FirstName" id="fname" class="validate" required="true">
+            <input type="text" name="title" id="fname" class="validate" required="true">
             <label for="fname" class="truncate">Subject</label>
         <!--span class="helper-text" data-error="Field is Required" data-success=""></span-->
 
@@ -109,11 +109,7 @@
 
     </select>
     <label>Concerned Authority</label>
-                <!--span class="helper-text" data-error="Select one" data-success=""></span-->
-
-
-
-            </div>
+                </div>
       </div>
 
       <div class="row">
@@ -143,12 +139,14 @@
 
         
         
-      <button  name="sub">Agree</button>
-    
+     
+     <button  name="sub" type="submit">Agree</button> 
 </form>
 
        </div>
      </div>
+   
+
     </div>
    
   </div>
@@ -198,30 +196,56 @@ return today;
     $('#delete').click(function(){
     	$('.modal').modal('open');
     	name = $('ul .active').attr('name');
-    	//console.log(name);
+    	console.log(date());
   
     	
     });
-    $('sub').click(function(){
-      data = new FormData($('form'));
-      data.append('uid','1234567ggtt');
-      data.append('date',date());
-      $.ajax({
-         type: 'post',
-         url : 'server/lodgeGr.php',
-         data = data,
-         beforeSend: function(){
+(function ($) {
+    $.fn.serializeFormJSON = function () {
 
-         },
-         success: function(resp){
-           alert(resp);
-         }
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+})(jQuery);
 
-      })
-    });
 
 
-});
+$('form').submit(function(e){
+  e.preventDefault();
+  data =$('#form').serializeFormJSON();
+   data['desc'] =document.querySelector('textarea').value ;
+   data['date'] = date();
+   data['uid'] = '555612E92OYCIP3U';
+   data['submit'] = true;
+   console.log(data);
+   $.ajax({
+    type: 'post',
+    url: "server/lodgeGr.php",
+    data:data,
+    //processData : true,
+    beforeSend: function(){},
+    success: function(resp){
+      alert(resp);
+    }
+    ,
+   })
+})    
+
+
+  });
+
 </script>
+
 </body>
 </html>

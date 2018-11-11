@@ -136,7 +136,7 @@ if(isset($_SESSION['uid'])){
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li class="active"><a href="#">Register</a></li>
     <li><a href="#">View Status</a></li>
-    <li><a href="LoginNew.php">Login</a></li>
+    <li id="log"><a href="#">Login</a></li>
     <li><a href="#">About Us</a></li>
     <li><a href="#">Process</a></li>
     <li><a href="#">FAQ</a></li>
@@ -149,7 +149,7 @@ if(isset($_SESSION['uid'])){
 </div>
   <ul class="sidenav" id="side-links">
     <li class="active"><a href="#" >Register</a></li>
-    <li><a href="Status.php">View Status</a></li>
+    <li><a href="#">View Status</a></li>
     <li><a href="LoginNew.php">Login</a></li>
     <li><a href="#">About Us</a></li>
     <li><a href="#">Process</a></li>
@@ -332,6 +332,53 @@ if(isset($_SESSION['uid'])){
     </div>
   </div>
 
+
+
+
+<div class="container" id="mai" style="display: none;">
+
+  <div class="row ">
+
+   <div class="col s12 m6 offset-m3 z-depth-1" style="padding: 30px;margin-top: 50px;background-color: white">
+    <img src="icons/login.svg" style="height: 80px;width: 80px;margin-left: 40%">
+    <p id="info" class="center"style="border-radius: 8px;background-color:#ff9999;width: 100% ; padding: 5px;color:red;display:none"></p>
+     <form style="margin-top: 10px" id="form" method="POST" enctype='application/x-www-form-urlencoded' >
+       <div class="row">
+          <div class=" input-field col s12 ">
+            <i class="material-icons prefix">email</i>
+            <input type="email" name="email" id="email" class="validate" required="true">
+            <label for="email" class="truncate">Email</label>
+        <!--span class="helper-text" data-error="Field is Required" data-success=""></span-->
+          </div>
+          </div>
+          <div class="row">
+          <div class=" input-field col s12 ">
+            <i class="material-icons prefix">vpn_key</i>
+            <input type="password" name="password" id="password" class="validate" required="true">
+            <label for="password" class="truncate">Password</label>
+        <!--span class="helper-text" data-error="Field is Required" data-success=""></span-->
+          </div>
+          </div>
+          
+            <a href="#" class="right" style="font-size: 12px">Forgot password ?</a><br>
+                        <a href="#" class="right" style="font-size: 12px">Admin Login</a>
+
+          
+           <div class="row center" style="margin-top: 15px">
+     <button class="waves-effect btn-large red " style="margin-left: 70px" name="submit" type="submit">Log in</button>
+         </div>
+     </form>
+   </div> 
+  </div>
+  </div>
+
+
+
+
+
+
+
+
  <footer class="page-footer" style="background-color: #ff6d00 ; display : none" id="foot">
           <div class="container" >
             <div class="row">
@@ -362,7 +409,14 @@ if(isset($_SESSION['uid'])){
 
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#log').click(function(e){
+      $("#main").css('display','none');
+      $("#mai").css('display','block');
+    })
+  })
+</script>
 <script src="js/materialize.js"></script>
   
   

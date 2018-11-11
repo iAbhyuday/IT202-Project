@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (!isset($_SESSION['uid'])) {
+  header("location: LoginNew.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,26 +73,29 @@
   </div>
 
 	<div class="navbar-fixed">  
-  <nav class="nav-wrapper fixed" style="display: none ;background-color: #ff6d00">
+  <nav class="nav-wrapper fixed" style="display: none ;background-color: black">
     
       
         
-      <a href="#" class="" id="logo" style="font-size: 19px ; color: black ; margin-left: 10px">Dashboard</a>
+      <a href="#" class="" id="logo" style="font-size: 19px ; color: #efbd09 ; margin-left: 10px">Dashboard</a>
       
       <a href="#" class="sidenav-trigger" data-target="side-links" style="width: 10%">
         <i class="material-icons">menu</i>
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#" id="uid"><?php echo $_SESSION['uid']?></a></li>
         <li class=""><a href="#">Help</a></li>
-    <li><a href="#">Logout</a></li>
+    <li ><a href="logout.php">Logout</a></li>
    </ul>
 </nav>
 
 </div>
 
   <ul  class="sidenav" id="side-links">
+    
+    <li><p class="uid"><?php echo $_SESSION['uid']?></p></li>
     <li class=""><a href="#" >Help</a></li>
-    <li><a href="#">Logout</a></li>
+    <li ><a href="logout.php">Logout</a></li>
    
 
   </ul>
@@ -107,9 +117,127 @@
 
 		
 	</div>
+<!-- Create Button --->
 
-<!-- Button -->
-  <div class="fixed-action-btn" style="display: none" id="action">
+
+
+ <div class="fixed-action-btn click-to-toggle" style="display: block" id="create">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  
+</div>
+<!--form modal -->
+
+
+
+
+
+
+
+
+  <div id="form-modal" class="modal">
+    <div class="modal-content">
+     <div class="row">
+       <div class="col s12 m12">
+          <form id="form" method="post">
+        <div class="row">
+          <div class=" input-field col s12 ">
+            <i class="material-icons prefix">bookmark</i>
+            <input type="text" name="title" id="fname" class="validate" required="true">
+            <label for="fname" class="truncate">Subject</label>
+        <!--span class="helper-text" data-error="Field is Required" data-success=""></span-->
+
+          
+
+        </div>
+      </div>
+          <div class="row">
+            
+            
+            <div class="input-field col s12 ">
+              <i class="material-icons prefix">location_city</i>
+               <select name="dept" class="validate" required="true">
+      <option value="" disabled selected>Concerned Authority</option>
+      <option value="Administrative Reforms and PG">Administrative Reforms and PG    </option> 
+
+<option value="Agriculture and Cooperation">Agriculture and Cooperation</option>
+
+<option value="Agriculture Research and Education ">Agriculture Research and Education </option> 
+
+<option value="Animal Husbandry, Dairying and Fisheries">Animal Husbandry, Dairying and Fisheries</option>
+
+<option value="Atomic Energy">Atomic Energy   </option>
+
+<option value="Bio Technology ">Bio Technology  </option>
+
+<option value="Central Board of Direct Taxes (Income Tax)">Central Board of Direct Taxes (Income Tax)</option>
+
+<option value="Central Board of Excise and Customs">Central Board of Excise and Customs   </option>
+
+<option value="Chemicals and Petrochemicals ">Chemicals and Petrochemicals  </option>
+
+<option value="Civil Aviation ">Civil Aviation  </option>
+
+<option value="Coal">Coal   </option>
+
+<option value="Consumer Affairs ">Consumer Affairs  </option>
+
+<option value="Corporate Affairs ">Corporate Affairs</option>  
+
+<option value="Culture">Culture   </option>
+
+
+<option value="Defence">Defence</option>
+
+    </select>
+    <label>Concerned Authority</label>
+                </div>
+      </div>
+
+      <div class="row">
+          <div class="input-field col s11 ">
+           <i class="material-icons prefix">description</i>
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Description</label>
+        </div>
+        </div>
+        <div class="row">
+       
+         <div class="file-field input-field col s11 ">
+      <div class="btn">
+        <span>File</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input id="imgFile"class="file-path validate" type="text" placeholder="Releted Image (Optional)">
+      
+      </div>
+    </div>
+
+
+
+          </div>
+            
+
+        
+        
+     
+     <button  name="sub" type="submit">Agree</button> 
+</form>
+
+</div>
+</div>
+   
+
+  </div>
+   
+</div>
+
+
+
+
+<div class="fixed-action-btn" style="display: none" id="setting">
   <a class="btn-floating btn-large red">
     <i class="large material-icons">settings</i>
   </a>
@@ -121,7 +249,9 @@
 
 <!--MODAL -->
 </div>
- <div id="modal1" class="modal bottom-sheet">
+
+  
+ <div id="pallete" class="modal bottom-sheet">
     <div class="modal-content">
      
     </div>
@@ -145,127 +275,7 @@ $(document).ready(function (){
 });
 </script>
 <script src="js/materialize.js"></script>
-<script type="text/javascript">
- 
-  $(document).ready(function(){
-    
-    $('.progress').hide();
-   $('.modal').modal();
-     $('#list').collapsible({
-    onOpenEnd: function(){
-      $('#action').fadeIn();
-    },
-    onCloseEnd  :function(){
-      $('#action').fadeOut();
-    }
-   });
-      $('.fixed-action-btn').floatingActionButton();
-     $('.modal').modal({onCloseEnd:function(){
-      $('#list .active').css('background-color','white');
-     }})
-   
-    $('nav').fadeIn();
-
-    $('.sidenav').sidenav();
-
-$.ajax({
-    type: 'post',
-    url: 'server/dataLoad.php',
-    data: {user:"276523RP3JO6S0XM"},
-    processData:true,
-    beforeSend:function(){
-      $('#list').append("<li class=\"placeholder wave\"><div class=\"line\"></div><div class=\"line\"></div><div class=\"line\"></div></li>");
-
-    },
-    success: function(resp){
-     //$('li').remove();
-     var data = JSON.parse(resp);
-     console.log(data);
-     for(i=0;i<data.num;i++){
-      x = JSON.parse(data.results[i]);
-      //console.log(x);
-      if(x.status==-1){
-      $('#list').prepend(`<li name="${x.id}"><div class=\"collapsible-header \"><p class="inner"style="width:100%">${x.title}</p> <abbr title="Rejected"><p class="btn-floating red pulse right"style="height:30px;width:30px;margin-top:15px" ></p></abbr></div><div class=\"collapsible-body\"><span>${x.data}</span><p style="width: 100%;border-top: solid 1px lightgrey">Submitted on :${x.date}  <span class="right">GID : ${x.id}</span></p></div></li>`);
-    }
-      else if(x.status==1){
-
-        $('#list').prepend(`<li name="${x.id}"><div class=\"collapsible-header \"><p class="inner"style="width:100%">${x.title}</p> <abbr title="Resolved"><p class="btn-floating green pulse right"style="height:30px;width:30px;margin-top:15px" ></p></abbr></div><div class=\"collapsible-body\"><span>${x.data}</span><p style="width: 100%;border-top: solid 1px lightgrey">Submitted on :${x.date}  <span class="right">GID : ${x.id}</span></p></div></li>`);
-      }
-       
-       else{
-
-        $('#list').prepend(`<li name="${x.id}"><div class=\"collapsible-header \"><p class="inner"style="width:100%">${x.title}</p><abbr title="Submitted"> <p class="btn-floating yellow pulse right"style="height:30px;width:30px;margin-top:15px" ></abbr></p></div><div class=\"collapsible-body\"><span>${x.data}</span><p style="width: 100%;border-top: solid 1px lightgrey">Submitted on :${x.date}  <span class="right">GID : ${x.id}</span></p></div></li>`);
-
-
-       }
-
-     }
-     $('.placeholder').remove();
-
-    }
-
-
-
-    
-   });
-
-
-    $('#delete').click(function(){
-      var title = $('ul .active .collapsible-header .inner').html();
-        $('#list .active ').css('background-color','lightgrey');
-        
-        $('.modal-content h5').remove();
-        $('.modal-content').append(`<h5 class="center">Do you want to Delete ${title} ?</h5>`);
-     
-
-
-           $('.modal').modal('open');
-      name = $('#list .active').attr('name');
-      console.log(name);
-      
-    });
-
-
-    $("#delConfirm").click(function(){
-          var name = $('#list .active').attr('name');
-          console.log(name);
-          $.ajax({
-            type: 'post',
-            url :'server/updater.php',
-            data: {gid:name,method:"delete",uid:"276523RP3JO6S0XM"},
-            processData: true,
-            beforeSend: function(){
-              $('.modal').modal('close');
-             // $('#sender').fadeIn();
-            },
-            success: function(resp){
-                $('#list active').hide().remove();
-                $('#response').fadeIn()
-                .html(JSON.parse(resp).data);
-
-            }
-
-          });
-          
-
-
-
-    });
-
-   $('#noDel').click(function(){
-    $('.modal').modal('close');
-   })
- 
-   
-
-
-
-
-
- 
-});
- 
-</script>
+<script src="js/dashboard.js"></script>
 
        </body>
 </html> 

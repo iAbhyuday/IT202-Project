@@ -35,7 +35,7 @@ else{
   }
   else{
   $hash = password_hash($pass,PASSWORD_BCRYPT);
-  $str = "1234567890qwertyuiopasdfghjklzxcvbnm@!$%*QWERTYUIOPASDFGHJKLZXCVBNM123454327890!$%qwdcbnjgfcft8umlb";
+  $str = "1234567890qwertyuiopasdfghjklzxcvbnm@!$QWERTYUIOPASDFGHJKLZXCVBNM123454327890!$qwdcbnjgfcft8umlb";
   $str = str_shuffle($str);
   $token = substr($str,0,30);
   $uS = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -49,7 +49,7 @@ $mail->setFrom('admin@robin.com',"admin");
 $mail->addAddress($email);
 $mail->Subject = "Email Verification";
 $mail->isHTML(true);
-$mail->Body = "<a href=\"robin.com/public/confirm.php?nusr=" .$uid ."&token=" .$token ."\"> Click here </a>";
+$mail->Body = "<a href=\"10.30.81.126/public/confirm.php?nusr=" .$uid ."&token=" .$token ."\"> Click here </a>";
 
 
 //  $sql = mysqli_query($conn,$cmd);
