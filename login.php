@@ -31,19 +31,16 @@
         label{
           font-family: 'Montserrat', bold;
         }
-
         #main {
                margin: 0 auto;
                max-width: 1280px;
                 width: 90%;
                     }
-
 @media only screen and (min-width: 993px) {
   #main {
     width: 70%;
   }
 }
-
 @media only screen and (max-width: 601px) {
       .brand-logo{
             width: 40%;
@@ -52,11 +49,9 @@
       #formWrapper{
         padding: 15px;
         }
-
   img{
     height: 100px;
     width: 100px;
-
   }
   #reg{
     font-size: 1.5rem;
@@ -74,7 +69,6 @@
    #main {
     width: 75%;
   }
-
    img{
     height: 200px;
     width: 200px;
@@ -83,40 +77,30 @@
     #reg{
          font-size: 1.7rem;
          margin-top: 0px;
-
     } 
     #MainRow{
       padding: 17px;
       }
-
       #formWrapper{
         padding: 20px;
         } } 
-
-
-
-
     body {
       display: flex;
       min-height: 100vh;
       flex-direction: column;
     }
-
     main {
       flex: 1 0 auto;
     }
-
     body {
       background: #fff;
     }
-
     .input-field input[type=date]:focus + label,
     .input-field input[type=text]:focus + label,
     .input-field input[type=email]:focus + label,
     .input-field input[type=password]:focus + label {
       color: #e91e63;
     }
-
     .input-field input[type=date]:focus,
     .input-field input[type=text]:focus,
     .input-field input[type=email]:focus,
@@ -124,11 +108,6 @@
       border-bottom: 2px solid #e91e63;
       box-shadow: none;
     }
-
-
-
-
-
      </style>
 </head>
 
@@ -177,7 +156,7 @@
 </ul>
 
 <div id="main"class="container"style="margin-bottom:80px;margin-top:20px ; background-color: white ;display : none;width:500px;max-width:500px;max-height:400px;" id="content">
-  <div class="row z-depth-1"style="background-color:pink;margin-top: 0px;" >
+  
 
      <main>
     <center>
@@ -233,7 +212,7 @@
      
 
   
-</div>  
+  
 </div>
 
 
@@ -286,24 +265,16 @@
     $('#main').fadeIn();
     $('img').fadeIn(3000);
     $('#foot').fadeIn();
-
   
     $('.sidenav').sidenav();
     
  });
      
-
-
-
-
     
-
   // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
   // var collapsibleElem = document.querySelector('.collapsible');
   // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-
   // Or with jQuery
-
  
 </script>
 

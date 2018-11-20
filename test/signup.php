@@ -22,13 +22,13 @@ if(isset($_SESSION['uid'])){
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Dosis|Oswald" rel="stylesheet">
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="../css/materialize.min.css">
 
     <script
-        src="js/Jquery.js"></script>
+        src="../js/Jquery.js"></script>
 
     <!-- Compiled and minified JavaScript -->
-    <script src="js/materialize.min.js"></script>
+    <script src="../js/materialize.min.js"></script>
     
     <title>Registration</title>
     
@@ -143,7 +143,7 @@ if(isset($_SESSION['uid'])){
   <nav class="nav-wrapper fixed" style="display: none ;background-color: #1565c0">
     
       
-       <img class="brand-logo hide-on-med-and-down" src="icons/logo.svg" style="height:50px;width: 50px ; margin-top:7px;margin-left: 10px">    
+       <img class="brand-logo hide-on-med-and-down" src="../icons/logo.svg" style="height:50px;width: 50px ; margin-top:7px;margin-left: 10px">    
       <a href="#" class="" id="logo" style="font-size: 25px ; color: white ; margin-left: 70px;font-family: 'KoHo', serif;">Grievance Redressal Portal</a>
       
       <a href="#" class="sidenav-trigger" data-target="side-links" style="width: 10%">
@@ -302,20 +302,20 @@ if(isset($_SESSION['uid'])){
 
         </div>
 <div class="row center">
-  <button class="btn-large  blue darken-4" type="submit" name="submit" id="submit">Register
-    <i class="material-icons right">beenhere</i>
+  <button class="btn" type="submit" name="submit" id="submit">Submit
+    <i class="material-icons right">send</i>
   </button>
         </div>
 </form>
 
 
 </div>
-  <div class="col m4 offset-m1 center hide-on-med-and-down "  id="side" style="background-color: white">
+  <div class="col m4 offset-m1 center hide-on-med-and-down "  id="side">
     <div class="row " style="padding: 10%">
-      <img src="icons/approve.svg" class="center" style="display: none;margin-top: 75px" >
+      <img src="../icons/approve.svg" class="center" style="display: none;" >
     </div>
     <div class="row" style="padding: 10%">
-      <p id="reg" style=" font-family: 'Bitter', sans-serif ;color: grey" class="flow-text" c>Register to lodge your first Grievance.</p>
+      <p id="reg" style=" font-family: 'Montserrat', sans-serif ;color: grey" class="flow-text" c>Register to Lodge your first Grievance.</p>
     </div>
   </div>    
   </div>
@@ -341,21 +341,37 @@ if(isset($_SESSION['uid'])){
             </div>
             </div>
             <div class="col s12 m5 center" style="padding:25px">
-           <img src="icons/email.svg" alt="pic" />
+           <img src="../icons/email.svg" alt="pic" />
           </div>
          </div>
       
     </div>
   </div>
 
- <footer class="page-footer" style="background-color:#0277bd ; display : none" id="foot">
-         
-          <div class="footer-copyright"style="background-color: #01579b">
-            <div class="container">
-            © Grievance Redressal Portal
-            <a class="grey-text text-lighten-4 right" href="#!"></a>
+ <footer class="page-footer" style="background-color: #ff6d00 ; display : none" id="foot">
+          <div class="container" >
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
             </div>
-        
+          </div>
+          <div class="footer-copyright"style="background-color: #e65100">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
         </footer>
             
 
@@ -363,10 +379,163 @@ if(isset($_SESSION['uid'])){
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 
-<script src="js/materialize.js"></script>
+<script src="../js/materialize.js"></script>
   
   
-<script src="js/registration.js"></script>
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+    $('#loader').hide();
+    //M.AutoInit();
+    $('#modal').modal();
+    $('.datepicker').datepicker({format :"yyyy-mm-dd",
+       yearRange:10
+
+        });
+    $('select').formSelect();
+    $('nav').fadeIn();
+    $('#main').fadeIn();
+    $('img').fadeIn();
+    $('#foot').fadeIn();
+
+      
+    $('.sidenav').sidenav();
+    if($(window).width() <601){
+      $('label').addClass('truncate');
+    }
+   $(function()
+  {
+ var validator = $('#form').validate(
+      {
+        rules:
+        {
+         password:{
+                    required:true,
+                    minlength:5
+
+                  },
+                  cpass:{
+                    required:true,
+                    minlength:5,
+                    equalTo:"#password"
+                  },
+          phone: {required:true,
+                      regex:true,
+                      minlength:10,
+                      maxlength:10
+                  }
+        },
+        messages:
+        { password:{
+                      required:"Create a password !",
+                      minlength:"Password should be of minimum 5 characters !"
+
+                    },
+
+                    cpass:{
+                      required:"Confirm password",
+                      minlength:"Password does'nt match !",
+                      equalTo:"Password does'nt match !"
+
+                    },
+          phone: {required:"Please provide a contact number !",
+                      regex: "Invalid Contact Number",
+                      minlength:"Invalid Contact Number",
+                      maxlength:"Invalid Contact Number"
+
+                  }          
+        },submitHandler: function(){
+
+             var x = $('#form').serialize();
+   
+          console.log(x);
+// AJAX CALL
+    $.ajax({
+        
+         type: "post",
+         url: "reg.php",
+         data: x,
+         beforeSend: function(){
+          $('#modal').modal('close');
+          $('#sender').fadeIn();
+         },
+         processData:false,
+         success: function(resp){
+          if(resp=="ok"){
+            $('#sender').fadeOut();
+            $('#modal').modal('open');
+            $('input').val("");
+            $('#info').hide();
+          }
+          else{
+            $('#sender').fadeOut();
+            $('#info').fadeIn();
+            $('#info').html(resp);
+                $('html, body').animate({
+        scrollTop: $("#nav").offset().top
+    }, 1000);
+
+
+          }
+         },
+         error:function(){
+          $('#info').html('Nope');
+         }
+
+    });
+
+
+        },
+                          errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+
+                }   
+      });
+    
+    $.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Please check your input."
+);
+    
+    $("#phone").rules("add", { regex: "^\\d{1,10}$" })
+    
+    $('#phone').keyup(function(){
+      validator.submitted["phone"]="Please enter only numbers upto 10 digits";
+    });
+  });
+
+
+
+ function validateForm() {
+        return Phone();
+    }
+    function Phone() {
+        var phone = document.forms["myForm"]["phone"].value;
+var phone = phone.replace(/[^\d]/g, '');
+           if(phone.length > 6 && phone.length < 11)
+            {  return true;  }
+
+   
+            else {
+                document.getElementById("phone").className = document.getElementById("phone").className + " error";
+                return false;
+            }
+        }
+
+ });
+     
+
+</script>
  </body>
 
 </html>

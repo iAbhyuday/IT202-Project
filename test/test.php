@@ -50,16 +50,8 @@
   
   </ul>
 </div>
- <div id="modal1" class="modal bottom-sheet">
-    <div class="modal-content">
-     
-    </div>
-    <div class="modal-footer ">
-     
-    </div>
-  </div>
-<!--ADD MODAL -->
- <a class="waves-effect waves-light btn modal-trigger" href="#modal">Modal</a>
+
+
 
   <!-- Modal Structure -->
   <div id="modal" class="modal">
@@ -84,9 +76,37 @@
               <i class="material-icons prefix">location_city</i>
                <select name="dept" class="validate" required="true">
       <option value="" disabled selected>Concerned Authority</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-      <option value="Other">Other</option>
+      <option value="Administrative Reforms and PG">Administrative Reforms and PG    </option> 
+
+<option value="Agriculture and Cooperation">Agriculture and Cooperation</option>
+
+<option value="Agriculture Research and Education ">Agriculture Research and Education </option> 
+
+<option value="Animal Husbandry, Dairying and Fisheries">Animal Husbandry, Dairying and Fisheries</option>
+
+<option value="Atomic Energy">Atomic Energy   </option>
+
+<option value="Bio Technology ">Bio Technology  </option>
+
+<option value="Central Board of Direct Taxes (Income Tax)">Central Board of Direct Taxes (Income Tax)</option>
+
+<option value="Central Board of Excise and Customs">Central Board of Excise and Customs   </option>
+
+<option value="Chemicals and Petrochemicals ">Chemicals and Petrochemicals  </option>
+
+<option value="Civil Aviation ">Civil Aviation  </option>
+
+<option value="Coal">Coal   </option>
+
+<option value="Consumer Affairs ">Consumer Affairs  </option>
+
+<option value="Corporate Affairs ">Corporate Affairs</option>  
+
+<option value="Culture">Culture   </option>
+
+
+<option value="Defence">Defence</option>
+
     </select>
     <label>Concerned Authority</label>
                 <!--span class="helper-text" data-error="Select one" data-success=""></span-->
@@ -122,15 +142,15 @@
             
 
         
-       
+        
+      <button  name="sub">Agree</button>
+    
 </form>
 
        </div>
      </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+   
   </div>
 
 
@@ -150,25 +170,57 @@ $(document).ready(function (){
    		$('#action').fadeOut();
    	}
    });
+
+   function date(){
+    var today = new Date();
+var dd = today.getDate();
+
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
+
+today = yyyy+'-'+mm+'-'+dd;
+return today;
+
+   }
     $('.fixed-action-btn').floatingActionButton();
      $('.modal').modal({onCloseEnd:function(){
      	$('ul .active').css('background-color','white');
      }})
     $('#delete').click(function(){
-    	var	title = $('ul .active .collapsible-header .inner').html();
-    		$('ul .active ').css('background-color','lightgrey');
-    		$('.modal-footer #delConfirm').remove();
-    		$('.modal-footer #noDel').remove();
-    		$('.modal-content h5').remove();
-    		
-
-
-
-           $('.modal').modal('open');
+    	$('.modal').modal('open');
     	name = $('ul .active').attr('name');
-    	console.log(name);
+    	//console.log(name);
+  
     	
     });
+    $('sub').click(function(){
+      data = new FormData($('form'));
+      data.append('uid','1234567ggtt');
+      data.append('date',date());
+      $.ajax({
+         type: 'post',
+         url : 'server/lodgeGr.php',
+         data = data,
+         beforeSend: function(){
+
+         },
+         success: function(resp){
+           alert(resp);
+         }
+
+      })
+    });
+
+
 });
 </script>
 </body>

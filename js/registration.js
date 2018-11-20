@@ -4,13 +4,15 @@
     //M.AutoInit();
     $('#modal').modal();
     $('.datepicker').datepicker({format :"yyyy-mm-dd",
-       yearRange:10
+       yearRange:30,
+       maxDate : new Date("2001-10-10"),
+       defaultDate: new Date("1997-12-02")
 
         });
     $('select').formSelect();
     $('nav').fadeIn();
     $('#main').fadeIn();
-    $('img').fadeIn(3000);
+    $('img').fadeIn();
     $('#foot').fadeIn();
 
       
